@@ -63,13 +63,25 @@
                     </a>
 
                     {{-- Delete Button --}}
-                    <button 
-                        onclick="if(confirm('Are you sure you want to delete this collectible?')) { /* Delete logic will go here */ alert('Delete functionality not yet implemented'); }"
-                        style="flex-shrink: 0; padding: 8px 16px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;"
-                        onmouseover="this.style.background='#c82333'"
-                        onmouseout="this.style.background='#dc3545'">
-                        Delete
-                    </button>
+                    <!-- Below is the new delete button code -->
+                    <form action="{{ route('collectibles.destroy', $collectible->id) }}"
+                        method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete this collectible?');"
+                        style="flex-shrink: 0;">
+
+                        @csrf
+                        @method('DELETE')
+
+
+                        <button
+                            type="submit"
+                            style="padding: 8px 16px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;"
+                            onmouseover="this.style.background='#c82333'"
+                            onmouseout="this.style.background='#dc3545'">
+                            Delete
+                        </button>
+                    </form>
+                    <!-- // Above is the new delete button code -->
                 </div>
             @endforeach
         </div>
