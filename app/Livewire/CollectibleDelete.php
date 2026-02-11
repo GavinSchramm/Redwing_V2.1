@@ -14,6 +14,6 @@ class CollectibleDelete extends Component
     return redirect()
         ->route('home')
         ->with('success', 'Collectible deleted successfully.');
-}
+    }
 }
 

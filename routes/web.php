@@ -26,4 +26,16 @@ Route::post('/logout', function () {
     return redirect('/login');
 })->name('logout');
 
-Route::delete('/collectibles/{collectible}', [CollectibleDelete::class, 'destroy'])->name('collectibles.destroy');
+Route::delete('/collectibles/{collectible}', [CollectibleDelete::class, 'destroy'])
+    ->middleware('auth')
+    ->name('collectibles.destroy');
+
+
+
+Route::get('/collectibles/create', CollectiblesCreate::class)
+    ->middleware('auth')
+    ->name('collectibles.create');
+
+Route::get('/collectibles/{collectible}/edit', CollectiblesCreate::class)
+    ->middleware('auth')
+    ->name('collectibles.edit');
