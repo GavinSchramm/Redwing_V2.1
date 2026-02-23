@@ -27,7 +27,7 @@
                     </div>
 
                     {{-- Collectible Info (Clickable) --}}
-                    <a href="/collectibles/{{ $collectible->id }}/edit" 
+                    <a href="{{ route('collectibles.edit', $collectible) }}" 
                        style="flex: 1; text-decoration: none; color: inherit; min-width: 0;">
                         <h3 style="margin: 0 0 8px 0; color: #333; font-size: 18px;">{{ $collectible->name }}</h3>
                         <div style="display: flex; gap: 15px; flex-wrap: wrap; font-size: 14px; color: #666;">
@@ -63,7 +63,6 @@
                     </a>
 
                     {{-- Delete Button --}}
-                    <!-- Below is the new delete button code -->
                     <form action="{{ route('collectibles.destroy', $collectible->id) }}"
                         method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this collectible?');"
@@ -71,7 +70,6 @@
 
                         @csrf
                         @method('DELETE')
-
 
                         <button
                             type="submit"
@@ -81,7 +79,6 @@
                             Delete
                         </button>
                     </form>
-                    <!-- // Above is the new delete button code -->
                 </div>
             @endforeach
         </div>

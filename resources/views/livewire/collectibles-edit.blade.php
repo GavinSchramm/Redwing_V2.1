@@ -1,9 +1,9 @@
 <div>
     <h1 class="text-xl font-bold mb-4">
-        Create Collectible
+        Edit Collectible
     </h1>
 
-    <form wire:submit.prevent="createCollectible">
+    <form wire:submit.prevent="updateCollectible">
 
         <!-- BASIC INFO -->
         <div>
@@ -59,7 +59,6 @@
                 </option>
             @endforeach
         </select>
-        @error('location_id') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
 
         <!-- CATIGORY INFO -->

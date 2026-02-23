@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\LoginForm;
 use App\Livewire\SignupForm;
+use App\Livewire\CollectibleCreate;
 use App\Livewire\CollectiblesList;
-use App\Livewire\CollectiblesCreate;
 use App\Livewire\CollectibleDelete;
+use App\Livewire\CollectiblesEdit;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,7 +18,9 @@ Route::get('/signup', SignupForm::class)->name('signup');
 
 Route::get('/home', CollectiblesList::class)->middleware('auth')->name('home');
 
-Route::get('/collectibles/create', CollectiblesCreate::class)->middleware('auth')->name('collectibles.create');
+Route::get('/collectibles/create', CollectibleCreate::class)
+    ->middleware('auth')
+    ->name('collectibles.create');
 
 Route::post('/logout', function () {
     Auth::logout();
@@ -30,12 +33,7 @@ Route::delete('/collectibles/{collectible}', [CollectibleDelete::class, 'destroy
     ->middleware('auth')
     ->name('collectibles.destroy');
 
-
-
-Route::get('/collectibles/create', CollectiblesCreate::class)
-    ->middleware('auth')
-    ->name('collectibles.create');
-
-Route::get('/collectibles/{collectible}/edit', CollectiblesCreate::class)
+Route::get('/collectibles/{collectible}/edit', CollectiblesEdit::class)
     ->middleware('auth')
     ->name('collectibles.edit');
+
