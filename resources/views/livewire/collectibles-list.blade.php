@@ -18,9 +18,9 @@
                     {{-- Thumbnail/Image --}}
                     <div style="flex-shrink: 0; width: 80px; height: 80px; background: #f0f0f0; border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                         @if($collectible->images->where('is_primary', true)->first())
-                            <img src="{{ $collectible->images->where('is_primary', true)->first()->path }}" 
-                                 alt="{{ $collectible->name }}" 
-                                 style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="{{ Storage::url($collectible->images->where('is_primary', true)->first()->path) }}" 
+                                alt="{{ $collectible->name }}" 
+                                style="width: 100%; height: 100%; object-fit: cover;">
                         @else
                             <span style="font-size: 36px; color: #ccc;">📦</span>
                         @endif

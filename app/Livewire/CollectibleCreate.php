@@ -95,7 +95,7 @@ class CollectibleCreate extends Component
             'caption' => 'nullable|string|max:255',
             'sort_order' => 'nullable|integer',
             'is_primary' => 'boolean',
-            'imageFile' => $this->isEditing ? 'nullable|image|max:10240' : 'required|image|max:10240', // 10MB
+            'imageFile' => 'required|image|max:10240', // 10MB
         ];
     }
 
@@ -132,7 +132,7 @@ class CollectibleCreate extends Component
 
         // Create image record
         $collectible->images()->create([
-            'path' => $imagePath, // ← THIS was null before
+            'path' => $imagePath, 
             'caption' => $this->caption,
             'file_size' => $this->imageFile->getSize(),
             'width' => $width,

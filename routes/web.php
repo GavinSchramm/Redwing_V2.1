@@ -36,4 +36,3 @@ Route::delete('/collectibles/{collectible}', [CollectibleDelete::class, 'destroy
 Route::get('/collectibles/{collectible}/edit', CollectiblesEdit::class)
     ->middleware('auth')
     ->name('collectibles.edit');
-

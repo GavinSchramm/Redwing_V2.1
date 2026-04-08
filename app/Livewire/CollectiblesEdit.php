@@ -95,7 +95,7 @@ class CollectiblesEdit extends Component
             'caption' => 'nullable|string|max:255',
             'sort_order' => 'nullable|integer',
             'is_primary' => 'boolean',
-            'imageFile' => $this->isEditing ? 'nullable|image|max:10240' : 'required|image|max:10240', // 10MB
+            'imageFile' => 'nullable|image|max:10240', // 10MB
         ];
     }
 
@@ -135,7 +135,6 @@ class CollectiblesEdit extends Component
                 ]);
             }
         } elseif ($image) {
-            // No new upload: just update caption & metadata
             $image->update([
                 'caption' => $this->caption,
                 'file_size' => $this->file_size,
