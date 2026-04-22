@@ -64,7 +64,7 @@
 
         <!-- CATIGORY INFO -->
         <div>
-            <select wire:model.defer="category_id">
+            <select wire:model="category_id">
                 <option value="">-- Select Category --</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">
@@ -72,6 +72,7 @@
                     </option>
                 @endforeach
             </select>
+            @error('category_id') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
 
         <!-- IMAGE / FILE DATA -->
@@ -128,9 +129,9 @@
 
         <!-- Submit -->
         <button type="submit"
-                onclick="return confirm('{{ $isEditing ? 'Update' : 'Create' }} this collectible?');">
-            {{ $isEditing ? 'Update' : 'Create' }}
+                onclick="if(!confirm('Create this collectible?')) return;">
+            Create
         </button>
-
+        
     </form>
 </div>

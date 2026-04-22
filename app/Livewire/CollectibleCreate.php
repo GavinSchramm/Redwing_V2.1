@@ -104,14 +104,20 @@ class CollectibleCreate extends Component
     {
         $validated = $this->validate();
 
-        // Make sure file exists
         if (!$this->imageFile) {
             $this->addError('imageFile', 'Image is required.');
             return;
         }
 
         // Store image
-        $imagePath = $this->imageFile->store('collectibles', 'public');
+        $path = $this->imageFile->store('collectibles', 'public');
+
+        // Get dimensions
+        $fullPath = storage_path('app/public/' . $path);
+        $dimensions = @getimagesize($fullPath);
+
+        $width = $dimensions[0] ?? null;
+        $height = $dimensions[1] ?? null;
 
         // Create collectible
         $collectible = Collectible::create([
@@ -126,19 +132,15 @@ class CollectibleCreate extends Component
             'category_id' => $this->category_id,
         ]);
 
-        // Get image size
-        $fullPath = storage_path('app/public/' . $imagePath);
-        [$width, $height] = getimagesize($fullPath);
-
-        // Create image record
+        // Create image
         $collectible->images()->create([
-            'path' => $imagePath, 
+            'path' => $path,
             'caption' => $this->caption,
             'file_size' => $this->imageFile->getSize(),
             'width' => $width,
             'height' => $height,
-            'sort_order' => 1,
-            'is_primary' => true,
+            'sort_order' => $this->sort_order,
+            'is_primary' => $this->is_primary,
         ]);
 
         return redirect()->route('home');
